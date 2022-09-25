@@ -2,6 +2,7 @@ package com.yabdioglu.tourreservation.user;
 
 import com.yabdioglu.tourreservation.user.User;
 import com.yabdioglu.tourreservation.user.UserService;
+import com.yabdioglu.tourreservation.user.vm.UserResponse;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public User createUser(@Valid @RequestBody User user) {
+    public UserResponse createUser(@Valid @RequestBody User user) {
         return userService.createUser(user);
     }
 }

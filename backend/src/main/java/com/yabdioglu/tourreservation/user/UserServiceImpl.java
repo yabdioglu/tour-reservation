@@ -1,5 +1,6 @@
 package com.yabdioglu.tourreservation.user;
 
+import com.yabdioglu.tourreservation.user.vm.UserResponse;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +15,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(User user) {
+    public UserResponse createUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        return new UserResponse(userRepository.save(user));
     }
 }

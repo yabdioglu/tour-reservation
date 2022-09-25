@@ -8,7 +8,7 @@ import javax.validation.ConstraintValidatorContext;
 public class UniqueUsernameValidator implements ConstraintValidator<UniqueUsername, String> {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Override
     public boolean isValid(String username, ConstraintValidatorContext context) {

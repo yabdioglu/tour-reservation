@@ -1,5 +1,7 @@
 package com.yabdioglu.tourreservation.user;
 
+import com.yabdioglu.tourreservation.user.vm.UserResponse;
+
 public interface UserService {
-    User createUser(User user);
+    UserResponse createUser(User user);
 }
