@@ -1,4 +1,4 @@
-package com.yabdioglu.tourreservation.util;
+package com.yabdioglu.tourreservation.shared;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

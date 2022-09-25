@@ -1,10 +1,8 @@
-package com.yabdioglu.tourreservation.service;
+package com.yabdioglu.tourreservation.tour;
 
-import com.yabdioglu.tourreservation.dto.TourRequest;
-import com.yabdioglu.tourreservation.entity.Tour;
+import com.yabdioglu.tourreservation.tour.vm.TourRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 

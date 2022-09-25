@@ -1,6 +1,6 @@
-package com.yabdioglu.tourreservation.dao;
+package com.yabdioglu.tourreservation.tour;
 
-import com.yabdioglu.tourreservation.entity.Tour;
+import com.yabdioglu.tourreservation.tour.Tour;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

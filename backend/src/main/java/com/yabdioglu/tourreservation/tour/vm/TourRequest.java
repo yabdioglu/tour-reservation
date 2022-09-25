@@ -1,4 +1,4 @@
-package com.yabdioglu.tourreservation.dto;
+package com.yabdioglu.tourreservation.tour.vm;
 
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;

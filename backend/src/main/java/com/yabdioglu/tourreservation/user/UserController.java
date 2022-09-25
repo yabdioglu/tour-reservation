@@ -1,11 +1,13 @@
-package com.yabdioglu.tourreservation.controller;
+package com.yabdioglu.tourreservation.user;
 
-import com.yabdioglu.tourreservation.entity.User;
-import com.yabdioglu.tourreservation.service.UserService;
+import com.yabdioglu.tourreservation.user.User;
+import com.yabdioglu.tourreservation.user.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/1.0")
@@ -18,7 +20,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public User createUser(@RequestBody User user) {
+    public User createUser(@Valid @RequestBody User user) {
         return userService.createUser(user);
     }
 }

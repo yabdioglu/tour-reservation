@@ -1,6 +1,6 @@
-package com.yabdioglu.tourreservation.dto;
+package com.yabdioglu.tourreservation.user.vm;
 
-import com.yabdioglu.tourreservation.entity.User;
+import com.yabdioglu.tourreservation.user.User;
 import lombok.Data;
 
 @Data

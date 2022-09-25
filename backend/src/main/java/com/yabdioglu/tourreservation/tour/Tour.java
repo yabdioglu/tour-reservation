@@ -1,4 +1,4 @@
-package com.yabdioglu.tourreservation.entity;
+package com.yabdioglu.tourreservation.tour;
 
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;

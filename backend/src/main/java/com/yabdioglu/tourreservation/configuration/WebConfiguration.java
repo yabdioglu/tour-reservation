@@ -1,4 +1,4 @@
-package com.yabdioglu.tourreservation.config;
+package com.yabdioglu.tourreservation.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
