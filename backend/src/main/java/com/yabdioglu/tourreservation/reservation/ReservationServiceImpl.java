@@ -24,13 +24,7 @@ public class ReservationServiceImpl implements ReservationService{
     @Override
     public Reservation createReservation(ReservationRequest reservationRequest) {
         Reservation reservation = new Reservation();
-        reservation.setUser(userService.findById(reservationRequest.getUserId()));
-        reservation.setTour(tourService.getById(reservationRequest.getTourId()));
-        reservation.setSelectDate(reservationRequest.getSelectDate());
-        reservation.setAdult(reservationRequest.getAdult());
-        reservation.setChild(reservationRequest.getChild());
-        reservation.setHotelName(reservationRequest.getHotelName());
-        reservation.setTotalPrice(reservationRequest.getTotalPrice());
+        convertToReservation(reservationRequest, reservation);
         return reservationRepository.save(reservation);
     }
 
@@ -51,5 +45,15 @@ public class ReservationServiceImpl implements ReservationService{
     @Override
     public Page<Reservation> getByUserId(Long userId, Pageable pageable) {
         return reservationRepository.findByUserId(userId, pageable);
+    }
+
+    private void convertToReservation(ReservationRequest reservationRequest, Reservation reservation) {
+        reservation.setUser(userService.findById(reservationRequest.getUserId()));
+        reservation.setTour(tourService.getById(reservationRequest.getTourId()));
+        reservation.setSelectDate(reservationRequest.getSelectDate());
+        reservation.setAdult(reservationRequest.getAdult());
+        reservation.setChild(reservationRequest.getChild());
+        reservation.setHotelName(reservationRequest.getHotelName());
+        reservation.setTotalPrice(reservationRequest.getTotalPrice());
     }
 }

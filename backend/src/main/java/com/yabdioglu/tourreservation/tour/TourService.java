@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public interface TourService {
 
-    Tour saveTour(TourRequest tourRequest) throws IOException;
+    Tour createTour(TourRequest tourRequest) throws IOException;
     Tour getById(Long id);
 
     Page<Tour> getAllTours(Pageable pageable);

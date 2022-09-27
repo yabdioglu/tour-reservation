@@ -18,7 +18,7 @@ public class TourController {
 
     @PostMapping("/tours")
     public Tour saveTour(@ModelAttribute TourRequest tourRequest) throws IOException {
-        return tourService.saveTour(tourRequest);
+        return tourService.createTour(tourRequest);
     }
 
     @GetMapping("/tours")

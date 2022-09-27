@@ -20,14 +20,9 @@ public class TourServiceImpl implements TourService {
         this.fileUploadUtil = fileUploadUtil;
     }
 
-    public Tour saveTour(TourRequest tourRequest) throws IOException {
+    public Tour createTour(TourRequest tourRequest) throws IOException {
         Tour tour = new Tour();
-        tour.setImageUrl(fileUploadUtil.saveFile(tourRequest.getMultipartFile()));
-        tour.setTitle(tourRequest.getTitle());
-        tour.setDescription(tourRequest.getDescription());
-        tour.setPriceForAdult(tourRequest.getPriceForAdult());
-        tour.setPriceForChild(tourRequest.getPriceForChild());
-        tour.setQuota(tourRequest.getQuota());
+        convertToTour(tourRequest, tour);
         return tourRepository.save(tour);
     }
 
@@ -43,5 +38,14 @@ public class TourServiceImpl implements TourService {
     @Override
     public Page<Tour> getAllTours(Pageable pageable) {
         return tourRepository.findAll(pageable);
+    }
+
+    private void convertToTour(TourRequest tourRequest, Tour tour) throws IOException {
+        tour.setImageUrl(fileUploadUtil.saveFile(tourRequest.getMultipartFile()));
+        tour.setTitle(tourRequest.getTitle());
+        tour.setDescription(tourRequest.getDescription());
+        tour.setPriceForAdult(tourRequest.getPriceForAdult());
+        tour.setPriceForChild(tourRequest.getPriceForChild());
+        tour.setQuota(tourRequest.getQuota());
     }
 }
