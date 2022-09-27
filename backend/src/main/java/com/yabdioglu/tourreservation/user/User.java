@@ -1,6 +1,7 @@
 package com.yabdioglu.tourreservation.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.yabdioglu.tourreservation.favorite.Favorite;
 import com.yabdioglu.tourreservation.reservation.Reservation;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -11,9 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -49,6 +48,10 @@ public class User implements UserDetails {
     @JsonIgnore
     private List<Reservation> reservations;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    private Set<Favorite> favorites = new HashSet<>();
+
     @Column(name = "date_created")
     @CreationTimestamp
     private Date dateCreated;
@@ -80,5 +83,14 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void addFavorite(Favorite favorite) {
+        if(favorite != null) {
+            favorites = new HashSet<>();
+        }
+
+        favorites.add(favorite);
+        favorite.setUser(this);
     }
 }

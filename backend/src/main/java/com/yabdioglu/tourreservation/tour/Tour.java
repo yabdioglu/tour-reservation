@@ -1,6 +1,7 @@
 package com.yabdioglu.tourreservation.tour;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.yabdioglu.tourreservation.favorite.Favorite;
 import com.yabdioglu.tourreservation.reservation.Reservation;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -12,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "tour")
+@Table(name = "tours")
 @Data
 public class Tour {
 
@@ -42,7 +43,7 @@ public class Tour {
     @Column(name="best_tour", columnDefinition = "boolean default false")
     private boolean bestTour;
 
-    @Column(name = "active", columnDefinition = "boolean default false")
+    @Column(name = "active", columnDefinition = "boolean default true")
     private boolean active;
 
     @Transient
@@ -51,6 +52,10 @@ public class Tour {
     @OneToMany(mappedBy = "tour", cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<Reservation> reservations;
+
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    private List<Favorite> favorites;
 
     @Column(name = "date_created")
     @CreationTimestamp
