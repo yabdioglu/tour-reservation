@@ -29,6 +29,8 @@ public class TourResponse {
 
     private Date dateCreated;
 
+    private double ratingAverage;
+
     public TourResponse(Tour tour) {
         this.id = tour.getId();
         this.imageUrl = tour.getImageUrl();
@@ -40,5 +42,6 @@ public class TourResponse {
         this.active = tour.isActive();
         this.quotaActive = tour.isQuotaActive();
         this.dateCreated = tour.getDateCreated();
+        this.ratingAverage = tour.getRatingAverage();
     }
 }

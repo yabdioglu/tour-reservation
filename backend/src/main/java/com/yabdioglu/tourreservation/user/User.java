@@ -1,6 +1,7 @@
 package com.yabdioglu.tourreservation.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.yabdioglu.tourreservation.comment.Comment;
 import com.yabdioglu.tourreservation.favorite.Favorite;
 import com.yabdioglu.tourreservation.reservation.Reservation;
 import lombok.*;
@@ -52,6 +53,10 @@ public class User implements UserDetails {
     @JsonIgnore
     private Set<Favorite> favorites = new HashSet<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    private Set<Comment> comments = new HashSet<>();
+
     @Column(name = "date_created")
     @CreationTimestamp
     private Date dateCreated;
@@ -83,14 +88,5 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    public void addFavorite(Favorite favorite) {
-        if(favorite != null) {
-            favorites = new HashSet<>();
-        }
-
-        favorites.add(favorite);
-        favorite.setUser(this);
     }
 }
