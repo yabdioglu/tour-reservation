@@ -1,5 +1,7 @@
 package com.yabdioglu.tourreservation.tour;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.yabdioglu.tourreservation.reservation.Reservation;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -7,6 +9,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "tour")
@@ -44,6 +47,10 @@ public class Tour {
 
     @Transient
     private boolean quotaActive;
+
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    private List<Reservation> reservations;
 
     @Column(name = "date_created")
     @CreationTimestamp

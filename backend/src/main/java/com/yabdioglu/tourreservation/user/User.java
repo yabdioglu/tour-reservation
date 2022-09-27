@@ -1,7 +1,8 @@
 package com.yabdioglu.tourreservation.user;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.yabdioglu.tourreservation.reservation.Reservation;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,15 +10,14 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
 @Data
-@NoArgsConstructor
 public class User implements UserDetails {
 
     @Id
@@ -44,6 +44,10 @@ public class User implements UserDetails {
 
     @Column(name = "role")
     private String role;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    private List<Reservation> reservations;
 
     @Column(name = "date_created")
     @CreationTimestamp
