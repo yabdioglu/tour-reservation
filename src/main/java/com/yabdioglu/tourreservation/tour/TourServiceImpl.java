@@ -6,6 +6,7 @@ import com.yabdioglu.tourreservation.shared.FileUploadUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
@@ -20,9 +21,9 @@ public class TourServiceImpl implements TourService {
         this.fileUploadUtil = fileUploadUtil;
     }
 
-    public Tour createTour(TourRequest tourRequest) throws IOException {
+    public Tour createTour(TourRequest tourRequest, MultipartFile multipartFile) throws IOException {
         Tour tour = new Tour();
-        convertToTour(tourRequest, tour);
+        convertToTour(tourRequest, tour, multipartFile);
         return tourRepository.save(tour);
     }
 
@@ -40,8 +41,8 @@ public class TourServiceImpl implements TourService {
         return tourRepository.findAll(pageable);
     }
 
-    private void convertToTour(TourRequest tourRequest, Tour tour) throws IOException {
-        tour.setImageUrl(fileUploadUtil.saveFile(tourRequest.getMultipartFile()));
+    private void convertToTour(TourRequest tourRequest, Tour tour, MultipartFile multipartFile) throws IOException {
+        tour.setImageUrl(fileUploadUtil.saveFile(multipartFile));
         tour.setTitle(tourRequest.getTitle());
         tour.setDescription(tourRequest.getDescription());
         tour.setPriceForAdult(tourRequest.getPriceForAdult());
