@@ -22,7 +22,7 @@ public class TourController {
     }
 
     @GetMapping("/tours")
-    public Page<Tour> getById(Pageable pageable) {
+    public Page<Tour> getAllTours(Pageable pageable) {
         return tourService.getAllTours(pageable);
     }
 
