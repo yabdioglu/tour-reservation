@@ -77,7 +77,7 @@ public class Tour {
     private Date lastUpdated;
 
     public double getRatingAverage() {
-        if(comments.isEmpty()) {
+        if(comments == null) {
             return 0;
         }
         double total = 0;
