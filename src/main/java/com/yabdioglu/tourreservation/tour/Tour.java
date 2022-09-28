@@ -84,7 +84,7 @@ public class Tour {
         for(Comment comment : comments) {
             total += comment.getRating();
         }
-        double average = total / comments.size();
+        double average = Double.parseDouble(df.format(total / comments.size()));
         return average;
     }
 }
