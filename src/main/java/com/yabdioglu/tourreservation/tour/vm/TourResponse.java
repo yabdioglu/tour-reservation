@@ -14,6 +14,8 @@ public class TourResponse {
 
     private Long id;
 
+    private String title;
+
     private String imageUrl;
 
     private String description;
@@ -38,6 +40,7 @@ public class TourResponse {
 
     public TourResponse(Tour tour) {
         this.id = tour.getId();
+        this.title = tour.getTitle();
         this.imageUrl = tour.getImageUrl();
         this.description = tour.getDescription();
         this.priceForAdult = tour.getPriceForAdult();
