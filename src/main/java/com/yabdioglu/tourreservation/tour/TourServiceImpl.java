@@ -1,8 +1,8 @@
 package com.yabdioglu.tourreservation.tour;
 
 import com.yabdioglu.tourreservation.error.NotFoundException;
+import com.yabdioglu.tourreservation.shared.cloudinary.CloudinaryService;
 import com.yabdioglu.tourreservation.tour.vm.TourRequest;
-import com.yabdioglu.tourreservation.shared.FileUploadUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,16 +14,18 @@ import java.io.IOException;
 public class TourServiceImpl implements TourService {
 
     private final TourRepository tourRepository;
-    private FileUploadUtil fileUploadUtil;
 
-    public TourServiceImpl(TourRepository tourRepository, FileUploadUtil fileUploadUtil) {
+    private CloudinaryService cloudinaryService;
+
+    public TourServiceImpl(TourRepository tourRepository, CloudinaryService cloudinaryService) {
         this.tourRepository = tourRepository;
-        this.fileUploadUtil = fileUploadUtil;
+        this.cloudinaryService = cloudinaryService;
     }
 
     public Tour createTour(TourRequest tourRequest, MultipartFile multipartFile) throws IOException {
         Tour tour = new Tour();
-        convertToTour(tourRequest, tour, multipartFile);
+        String url = cloudinaryService.uploadFile(multipartFile);
+        convertToTour(tourRequest, tour, url);
         return tourRepository.save(tour);
     }
 
@@ -41,8 +43,8 @@ public class TourServiceImpl implements TourService {
         return tourRepository.findAll(pageable);
     }
 
-    private void convertToTour(TourRequest tourRequest, Tour tour, MultipartFile multipartFile) throws IOException {
-        tour.setImageUrl(fileUploadUtil.saveFile(multipartFile));
+    private void convertToTour(TourRequest tourRequest, Tour tour, String url) throws IOException {
+        tour.setImageUrl(url);
         tour.setTitle(tourRequest.getTitle());
         tour.setDescription(tourRequest.getDescription());
         tour.setPriceForAdult(tourRequest.getPriceForAdult());

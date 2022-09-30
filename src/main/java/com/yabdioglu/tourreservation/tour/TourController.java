@@ -1,6 +1,8 @@
 package com.yabdioglu.tourreservation.tour;
 
+import com.yabdioglu.tourreservation.shared.GenericResponse;
 import com.yabdioglu.tourreservation.tour.vm.TourRequest;
+import com.yabdioglu.tourreservation.tour.vm.TourResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
@@ -18,19 +20,19 @@ public class TourController {
     }
 
     @PostMapping("/tours")
-    public Tour saveTour(@ModelAttribute TourRequest tourRequest, @RequestParam MultipartFile multipartFile) throws IOException {
-        System.out.println(multipartFile.getOriginalFilename());
-        return tourService.createTour(tourRequest, multipartFile);
+    public GenericResponse createTour(@ModelAttribute TourRequest tourRequest, @RequestParam MultipartFile multipartFile) throws IOException {
+        tourService.createTour(tourRequest, multipartFile);
+        return new GenericResponse("tour created");
     }
 
     @GetMapping("/tours")
-    public Page<Tour> getAllTours(Pageable pageable) {
-        return tourService.getAllTours(pageable);
+    public Page<TourResponse> getAllTours(Pageable pageable) {
+        return tourService.getAllTours(pageable).map(TourResponse::new);
     }
 
     @GetMapping("/tours/{id}")
-    public Tour getById(@PathVariable Long id) {
-        return tourService.getById(id);
+    public TourResponse getById(@PathVariable Long id) {
+        return new TourResponse(tourService.getById(id));
     }
 
 }

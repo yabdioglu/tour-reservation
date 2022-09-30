@@ -1,8 +1,10 @@
 package com.yabdioglu.tourreservation.comment;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.yabdioglu.tourreservation.tour.Tour;
 import com.yabdioglu.tourreservation.user.User;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -11,7 +13,8 @@ import java.util.Date;
 
 @Entity
 @Table(name = "comments")
-@Data
+@Getter
+@Setter
 public class Comment {
 
     @Id
@@ -25,6 +28,7 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "tour_id")
+    @JsonBackReference
     private Tour tour;
 
     @Column(name = "rating")
@@ -40,4 +44,60 @@ public class Comment {
     @Column(name = "last_updated")
     @UpdateTimestamp
     private Date lastUpdated;
+
+    /*public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Tour getTour() {
+        return tour;
+    }
+
+    public void setTour(Tour tour) {
+        this.tour = tour;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public Date getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }*/
 }

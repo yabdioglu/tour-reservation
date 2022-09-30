@@ -1,10 +1,13 @@
 package com.yabdioglu.tourreservation.tour.vm;
 
+import com.yabdioglu.tourreservation.comment.vm.CommentResponse;
 import com.yabdioglu.tourreservation.tour.Tour;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 public class TourResponse {
@@ -31,6 +34,8 @@ public class TourResponse {
 
     private double ratingAverage;
 
+    private List<CommentResponse> comments;
+
     public TourResponse(Tour tour) {
         this.id = tour.getId();
         this.imageUrl = tour.getImageUrl();
@@ -43,5 +48,6 @@ public class TourResponse {
         this.quotaActive = tour.isQuotaActive();
         this.dateCreated = tour.getDateCreated();
         this.ratingAverage = tour.getRatingAverage();
+        this.comments = tour.getComments().stream().map(CommentResponse::new).collect(Collectors.toList());
     }
 }
