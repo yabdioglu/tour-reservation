@@ -18,6 +18,7 @@ import java.util.Map;
 @SpringBootApplication
 @EnableSwagger2
 @PropertySource("classpath:config.properties")
+@PropertySource("classpath:application-prod.properties")
 public class TourReservationApplication {
 
     @Autowired
