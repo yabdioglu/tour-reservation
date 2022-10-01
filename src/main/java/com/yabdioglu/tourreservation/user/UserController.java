@@ -3,6 +3,7 @@ package com.yabdioglu.tourreservation.user;
 import com.yabdioglu.tourreservation.shared.GenericResponse;
 import com.yabdioglu.tourreservation.user.User;
 import com.yabdioglu.tourreservation.user.UserService;
+import com.yabdioglu.tourreservation.user.vm.UserRequest;
 import com.yabdioglu.tourreservation.user.vm.UserResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,8 +22,8 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public GenericResponse createUser(@Valid @RequestBody User user) {
-        userService.createUser(user);
+    public GenericResponse createUser(@Valid @RequestBody UserRequest userRequest) {
+        userService.createUser(userRequest);
         return new GenericResponse("user created");
     }
 

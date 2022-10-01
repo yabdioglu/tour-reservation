@@ -1,6 +1,7 @@
 package com.yabdioglu.tourreservation.user;
 
 import com.yabdioglu.tourreservation.error.NotFoundException;
+import com.yabdioglu.tourreservation.user.vm.UserRequest;
 import com.yabdioglu.tourreservation.user.vm.UserResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,9 +19,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void createUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    public void createUser(UserRequest userRequest) {
+        userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+        User user = new User();
+        convertToUser(userRequest, user);
         userRepository.save(user);
+    }
+
+    private void convertToUser(UserRequest userRequest, User user) {
+        user.setFirstName(userRequest.getFirstName());
+        user.setLastName(userRequest.getLastName());
+        user.setPassword(userRequest.getPassword());
+        user.setUsername(userRequest.getUsername());
+        user.setPhoneNumber(userRequest.getPhoneNumber());
     }
 
     @Override

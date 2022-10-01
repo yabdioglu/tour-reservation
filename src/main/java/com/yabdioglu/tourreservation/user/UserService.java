@@ -1,11 +1,12 @@
 package com.yabdioglu.tourreservation.user;
 
+import com.yabdioglu.tourreservation.user.vm.UserRequest;
 import com.yabdioglu.tourreservation.user.vm.UserResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface UserService {
-    void createUser(User user);
+    void createUser(UserRequest userRequest);
 
     User findById(Long id);
 
