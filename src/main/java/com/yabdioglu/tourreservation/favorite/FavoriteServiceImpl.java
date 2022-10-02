@@ -33,4 +33,9 @@ public class FavoriteServiceImpl implements FavoriteService{
         favorite.setTour(tourService.getById(favoriteRequest.getTourId()));
         favoriteRepository.save(favorite);
     }
+
+    @Override
+    public void delete(Long id) {
+        favoriteRepository.deleteById(id);
+    }
 }

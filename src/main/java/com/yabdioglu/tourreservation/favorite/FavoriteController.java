@@ -27,4 +27,10 @@ public class FavoriteController {
     public Page<FavoriteResponse> findByUserId(@PathVariable Long userId, Pageable pageable) {
         return favoriteService.findByUserId(userId, pageable).map(FavoriteResponse::new);
     }
+
+    @DeleteMapping("/favorites/{id}")
+    public GenericResponse deleteFavorite(@PathVariable Long id) {
+        favoriteService.delete(id);
+        return new GenericResponse("Favorite removed");
+    }
 }
