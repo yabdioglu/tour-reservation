@@ -1,6 +1,7 @@
 package com.yabdioglu.tourreservation.reservation.vm;
 
 import com.yabdioglu.tourreservation.reservation.Reservation;
+import com.yabdioglu.tourreservation.tour.vm.TourResponse;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -14,7 +15,7 @@ public class ReservationResponse {
 
     private Long userId;
 
-    private Long tourId;
+    private TourResponse tourResponse;
 
     private LocalDate selectDate;
 
@@ -35,7 +36,7 @@ public class ReservationResponse {
     public ReservationResponse(Reservation reservation) {
         this.id = reservation.getId();
         this.userId = reservation.getUser().getId();
-        this.tourId = reservation.getTour().getId();
+        this.tourResponse = new TourResponse(reservation.getTour());
         this.selectDate = reservation.getSelectDate();
         this.adult = reservation.getAdult();
         this.child = reservation.getChild();
