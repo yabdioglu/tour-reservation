@@ -7,6 +7,7 @@ import com.yabdioglu.tourreservation.user.vm.UserRequest;
 import com.yabdioglu.tourreservation.user.vm.UserResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -22,6 +23,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
+//    @PreAuthorize("hasAuthority('ADMIN')")
     public GenericResponse createUser(@Valid @RequestBody UserRequest userRequest) {
         userService.createUser(userRequest);
         return new GenericResponse("user created");

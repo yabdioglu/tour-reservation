@@ -4,11 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.yabdioglu.tourreservation.comment.Comment;
 import com.yabdioglu.tourreservation.favorite.Favorite;
 import com.yabdioglu.tourreservation.reservation.Reservation;
+import com.yabdioglu.tourreservation.role.Role;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -57,6 +59,11 @@ public class User implements UserDetails {
     @JsonIgnore
     private Set<Comment> comments = new HashSet<>();
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name= "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roleSet;
+
     @Column(name = "date_created")
     @CreationTimestamp
     private Date dateCreated;
@@ -67,7 +74,12 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return AuthorityUtils.createAuthorityList("Role_user");
+        Set<Role> roleSet = this.getRoleSet();
+        List<SimpleGrantedAuthority> simpleGrantedAuthorityList = new ArrayList<>();
+        for (Role role: roleSet) {
+            simpleGrantedAuthorityList.add(new SimpleGrantedAuthority(role.getName()));
+        }
+        return simpleGrantedAuthorityList;
     }
 
     @Override
