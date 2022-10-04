@@ -43,6 +43,11 @@ public class TourServiceImpl implements TourService {
         return tourRepository.findAll(pageable);
     }
 
+    @Override
+    public Page<Tour> findByTitleContaining(String title, Pageable pageable) {
+        return tourRepository.findByTitleContainingIgnoreCase(title, pageable);
+    }
+
     private void convertToTour(TourRequest tourRequest, Tour tour, String url) throws IOException {
         tour.setImageUrl(url);
         tour.setTitle(tourRequest.getTitle());

@@ -35,4 +35,9 @@ public class TourController {
         return new TourResponse(tourService.getById(id));
     }
 
+    @GetMapping("/tours/findByTitleContaining/{title}")
+    public Page<TourResponse> findByTitleContaining(@PathVariable String title, Pageable pageable) {
+        return tourService.findByTitleContaining(title,pageable).map(TourResponse::new);
+    }
+
 }

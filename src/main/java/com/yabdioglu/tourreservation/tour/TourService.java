@@ -11,6 +11,6 @@ public interface TourService {
 
     Tour createTour(TourRequest tourRequest, MultipartFile multipartFile) throws IOException;
     Tour getById(Long id);
-
     Page<Tour> getAllTours(Pageable pageable);
+    Page<Tour> findByTitleContaining(String title, Pageable pageable);
 }
