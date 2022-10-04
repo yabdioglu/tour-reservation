@@ -24,31 +24,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        // Spring security csrf'i(Cross Site Request Forgery) enable etmek.
-        // Bizim buna ihtiyacımız olmadığı için disable ediyoruz.
         http.csrf().disable();
 
-        // tarayıcının login popup'ını kapatalım
         http.httpBasic().authenticationEntryPoint(new AuthEntryPoint());
 
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/1.0/auth").authenticated() // buraya gelen istekler authentication parametrelerini barındırmalı.
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/1.0/auth").authenticated()
 //                .antMatchers(HttpMethod.POST,"/api/1.0/users").hasAuthority("ADMIN")
                 .and()
-                .authorizeRequests().anyRequest().permitAll(); // bunun dışında kalan herhangi request için authentication'a bakma
+                .authorizeRequests().anyRequest().permitAll();
 
-/*                http.authorizeRequests()
-//                .anyRequest().permitAll()
-                .antMatchers("/api/1.0/users").hasAuthority("ADMIN")
-                .anyRequest().authenticated()
-                        .and().formLogin()
-                        .and().httpBasic();*/
-
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // authenticated accesste bulunduktan sonra no authentication'a çektiğimizde secure olmasını engelliyoruz.
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userAuthService).passwordEncoder(passwordEncoder()); // eğer bi user bulmaya çalışıyorsan bu service'i kullan
+        auth.userDetailsService(userAuthService).passwordEncoder(passwordEncoder());
     }
 
     @Bean

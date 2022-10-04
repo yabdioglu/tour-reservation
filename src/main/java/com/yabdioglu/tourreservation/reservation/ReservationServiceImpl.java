@@ -47,6 +47,13 @@ public class ReservationServiceImpl implements ReservationService{
         return reservationRepository.findByUserId(userId, pageable);
     }
 
+    @Override
+    public Reservation cancelReservation(Long reservationId) {
+        Reservation reservation = getById(reservationId);
+        reservation.setCancelled(true);
+        return reservationRepository.save(reservation);
+    }
+
     private void convertToReservation(ReservationRequest reservationRequest, Reservation reservation) {
         reservation.setUser(userService.findById(reservationRequest.getUserId()));
         reservation.setTour(tourService.getById(reservationRequest.getTourId()));

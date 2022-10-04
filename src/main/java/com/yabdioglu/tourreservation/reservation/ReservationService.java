@@ -13,5 +13,7 @@ public interface ReservationService {
 
     Page<Reservation> getByUserId(Long userId, Pageable pageable);
 
+    Reservation cancelReservation(Long reservationId);
+
 
 }
