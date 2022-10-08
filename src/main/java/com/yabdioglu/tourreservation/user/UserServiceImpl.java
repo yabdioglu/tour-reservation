@@ -46,6 +46,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll(pageable);
     }
 
+    @Override
+    public void deleteById(Long id) {
+        userRepository.deleteById(id);
+    }
+
     private void convertToUser(UserRequest userRequest, User user) {
         user.setFirstName(userRequest.getFirstName());
         user.setLastName(userRequest.getLastName());

@@ -39,4 +39,10 @@ public class UserController {
         User user = userService.findById(id);
         return new UserResponse(user);
     }
+
+    @DeleteMapping("/users/{id}")
+    public GenericResponse deleteById(@PathVariable Long id) {
+        userService.deleteById(id);
+        return new GenericResponse("user deleted");
+    }
 }
