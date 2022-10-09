@@ -19,7 +19,8 @@ import java.util.*;
 
 @Entity
 @Table(name = "users")
-@Data
+@Getter
+@Setter
 public class User implements UserDetails {
 
     @Id
