@@ -44,4 +44,10 @@ public class TourController {
         return tourService.findByTitleContaining(title,pageable).map(TourResponse::new);
     }
 
+    @DeleteMapping("/tours/{id}")
+    public GenericResponse deleteById(@PathVariable Long id) {
+        tourService.deleteById(id);
+        return new GenericResponse("tour deleted");
+    }
+
 }

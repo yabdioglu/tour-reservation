@@ -1,6 +1,7 @@
 package com.yabdioglu.tourreservation.tour;
 
 import com.yabdioglu.tourreservation.error.NotFoundException;
+import com.yabdioglu.tourreservation.shared.GenericResponse;
 import com.yabdioglu.tourreservation.shared.cloudinary.CloudinaryService;
 import com.yabdioglu.tourreservation.tour.vm.TourRequest;
 import org.springframework.data.domain.Page;
@@ -46,6 +47,11 @@ public class TourServiceImpl implements TourService {
     @Override
     public Page<Tour> findByTitleContaining(String title, Pageable pageable) {
         return tourRepository.findByTitleContainingIgnoreCase(title, pageable);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        tourRepository.deleteById(id);
     }
 
     private void convertToTour(TourRequest tourRequest, Tour tour, String url) throws IOException {

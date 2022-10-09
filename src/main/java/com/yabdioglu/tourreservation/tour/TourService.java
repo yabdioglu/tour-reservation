@@ -1,5 +1,6 @@
 package com.yabdioglu.tourreservation.tour;
 
+import com.yabdioglu.tourreservation.shared.GenericResponse;
 import com.yabdioglu.tourreservation.tour.vm.TourRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,4 +14,6 @@ public interface TourService {
     Tour getById(Long id);
     Page<Tour> getAllTours(Pageable pageable);
     Page<Tour> findByTitleContaining(String title, Pageable pageable);
+
+    void deleteById(Long id);
 }
