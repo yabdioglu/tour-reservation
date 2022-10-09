@@ -57,7 +57,7 @@ public class User implements UserDetails {
     @JsonIgnore
     private Set<Comment> comments = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(name= "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roleSet;
