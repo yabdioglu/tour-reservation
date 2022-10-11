@@ -2,6 +2,7 @@ package com.yabdioglu.tourreservation.reservation;
 
 import com.yabdioglu.tourreservation.reservation.vm.ReservationRequest;
 import com.yabdioglu.tourreservation.reservation.vm.ReservationResponse;
+import com.yabdioglu.tourreservation.reservation.vm.ReservationResponseWithUser;
 import com.yabdioglu.tourreservation.shared.GenericResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,8 +26,8 @@ public class ReservationController {
     }
 
     @GetMapping("/reservations")
-    public Page<ReservationResponse> getAllReservations(Pageable pageable) {
-        return reservationService.getAllReservations(pageable).map(ReservationResponse::new);
+    public Page<ReservationResponseWithUser> getAllReservations(Pageable pageable) {
+        return reservationService.getAllReservations(pageable).map(ReservationResponseWithUser::new);
     }
 
     @GetMapping("/reservations/{id}")
