@@ -29,6 +29,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.httpBasic().authenticationEntryPoint(new AuthEntryPoint());
 
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/1.0/auth").authenticated()
+                .antMatchers(HttpMethod.GET, "/api/1.0/users").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET, "/api/1.0/reservations").hasAuthority("ADMIN")
 //                .antMatchers(HttpMethod.POST,"/api/1.0/users").hasAuthority("ADMIN")
                 .and()
                 .authorizeRequests().anyRequest().permitAll();

@@ -1,7 +1,9 @@
 package com.yabdioglu.tourreservation;
 
 import com.cloudinary.Cloudinary;
+import com.yabdioglu.tourreservation.role.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -45,6 +47,19 @@ public class TourReservationApplication {
         config.put("api_secret", env.getProperty("api.secret"));
         cloudinary = new Cloudinary(config);
         return cloudinary;
+    }
+
+    // run after the application has initialized.
+    @Bean
+    CommandLineRunner run(RoleService roleService) {
+        return args -> {
+            if(roleService.findByName("USER") == null){
+                roleService.createRole("USER");
+            }
+            if(roleService.findByName("ADMIN") == null){
+                roleService.createRole("ADMIN");
+            }
+        };
     }
 
 }
