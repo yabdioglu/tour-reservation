@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/1.0")
+@CrossOrigin("https://tour-reservation-admin.herokuapp.com")
 public class ReservationController {
 
     private ReservationService reservationService;
@@ -26,6 +27,7 @@ public class ReservationController {
     }
 
     @GetMapping("/reservations")
+    // has admin
     public Page<ReservationResponseWithUser> getAllReservations(Pageable pageable) {
         return reservationService.getAllReservations(pageable).map(ReservationResponseWithUser::new);
     }

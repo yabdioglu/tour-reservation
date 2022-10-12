@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/1.0")
-@CrossOrigin
+@CrossOrigin("https://tour-reservation-admin.herokuapp.com")
 public class AuthController {
 
     private UserRepository userRepository;

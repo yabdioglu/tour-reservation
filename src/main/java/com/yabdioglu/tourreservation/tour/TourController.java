@@ -15,6 +15,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/1.0")
+@CrossOrigin("https://tour-reservation-admin.herokuapp.com")
 public class TourController {
     private TourService tourService;
 
